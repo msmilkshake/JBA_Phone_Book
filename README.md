@@ -1,26 +1,35 @@
-<h2 style="text-align: center;">Stage 1/4: A needle in the hay</h2>
+<h2 style="text-align: center;">Stage 2/4: Jumping bubbles</h2>
 
 <h2 style="text-align: center;">Description</h2>
 
-<p>Ever see a huge 2000+ page book full of various organizations and people, written with a small font and with multiple columns on each page? If you’re unprepared, it's an impossible task to find the information you need. In fact, even computers can struggle with the task of searching among millions of entries from the start of the directory to its end.</p>
+<p>It’s ineffective, isn't it? You have to iterate over every element of the numbers list every time you want to find someone's number. But this is the only way if your list contains unordered data. Any number can be anywhere in the list, so you are forced to check every element.<br>
+    <br>
+    In this stage, you should sort the list of numbers alphabetically by the owner’s name. Sort the list using the bubble sort algorithm and search in the list using the jump search algorithm.</p>
 
-<p>Various algorithms can perform tasks differently; some are slower than others. In this project, you will implement several algorithms and compare the time efficiency among them using a big dataset.</p>
+<p>After sorting, search for 500 phone numbers using the same list from the previous stage. Note how long it takes to sort the list and also measure the time the program spent during the searching. Don't include the sorting time into the searching time, because the list of numbers stays sorted after every search request. If you want to save the sorted list into the file so you don’t have to sort it again, then do not override the file with an unsorted list of phone numbers. This file will also be required in the next stage.</p>
 
-<p>Then you need to download the file <a target="_blank" href="https://stepik.org/media/attachments/lesson/197761/directory.txt" rel="nofollow noopener noreferrer">directory.txt</a>. This file contains over a million people’s phone numbers in multiple cities.</p>
-
-<p>In this stage, you should implement the simplest search and find numbers for the people listed in the file <a target="_blank" href="https://stepik.org/media/attachments/lesson/197761/find.txt" rel="nofollow noopener noreferrer">find.txt</a>.</p>
-
-<p>Note how long it takes you to do this by a linear search so you can compare results with other search methods.</p>
-
-<p>To measure time difference you can use <code class="java">System.currentTimeMillis()</code>.</p>
-
-<p>Also notice, that you don't need to read the file "directory.txt" again after each query. You should load all  lines into memory and measure only the search process.</p>
-
-<p><div class="alert alert-warning">Please, do not keep the downloaded files inside your project directory because the server can reject large files and you will see the message <strong>"Failed to post submission to the Hyperskill"</strong>.</div></p>
+<p>If sorting takes a very long time (more than 10 times longer than all 500 iterations of the linear search), you should stop sorting and use the linear search. Look at the second example to see what you need to output.</p>
 
 <h2 style="text-align: center;">Example</h2>
 
-<p>Below is an example of how should look your output:</p>
+<p>Output both approaches one after another and see which one is faster. Output example is shown below. Note that you can get totally different sorting and searching times!</p>
 
-<pre><code class="java">Start searching...
-Found 500 / 500 entries. Time taken: 1 min. 56 sec. 328 ms.</code></pre>
+<p><strong>Example 1:</strong></p>
+
+<pre><code class="java">Start searching (linear search)...
+Found 500 / 500 entries. Time taken: 1 min. 56 sec. 328 ms.
+
+Start searching (bubble sort + jump search)...
+Found 500 / 500 entries. Time taken: 9 min. 15 sec. 291 ms.
+Sorting time: 8 min. 45 sec. 251 ms.
+Searching time: 0 min. 30 sec. 40 ms.</code></pre>
+
+<p><strong>Example 2: </strong></p>
+
+<pre><code class="java">Start searching (linear search)...
+Found 500 / 500 entries. Time taken: 2 min. 01 sec. 134 ms.
+
+Start searching (bubble sort + jump search)...
+Found 500 / 500 entries. Time taken: 22 min. 14 sec. 482 ms.
+Sorting time: 20 min. 12 sec. 251 ms. - STOPPED, moved to linear search
+Searching time: 2 min. 02 sec. 231 ms.</code></pre>

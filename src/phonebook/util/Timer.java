@@ -20,7 +20,7 @@ public class Timer {
     
     private static long getSecs(long time) {
         long secs = time - getMins(time) * 60000L;
-        return TimeUnit.MILLISECONDS.toSeconds(time);
+        return TimeUnit.MILLISECONDS.toSeconds(secs);
     }
     
     private static long getMs(long time) {
@@ -40,7 +40,7 @@ public class Timer {
     }
     
     public static String longToString(long time) {
-        return getMs(time) + "min. " +
+        return getMins(time) + " min. " +
                 getSecs(time) + " sec. " +
                 getMs(time) + " ms.";
     }

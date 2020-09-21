@@ -1,20 +1,16 @@
-<h2 style="text-align: center;">Stage 2/4: Jumping bubbles</h2>
+<h2 style="text-align: center;">Stage 3/4: Need for speed</h2>
 
 <h2 style="text-align: center;">Description</h2>
 
-<p>It’s ineffective, isn't it? You have to iterate over every element of the numbers list every time you want to find someone's number. But this is the only way if your list contains unordered data. Any number can be anywhere in the list, so you are forced to check every element.<br>
-    <br>
-    In this stage, you should sort the list of numbers alphabetically by the owner’s name. Sort the list using the bubble sort algorithm and search in the list using the jump search algorithm.</p>
+<p>Let's use faster methods to sort the list of numbers as well as to search in the list.</p>
 
-<p>After sorting, search for 500 phone numbers using the same list from the previous stage. Note how long it takes to sort the list and also measure the time the program spent during the searching. Don't include the sorting time into the searching time, because the list of numbers stays sorted after every search request. If you want to save the sorted list into the file so you don’t have to sort it again, then do not override the file with an unsorted list of phone numbers. This file will also be required in the next stage.</p>
+<p>As in the previous stage, you should first sort the list of phone numbers by an owner name and then search the numbers of the 500 people from the list given in the first stage. Remember that to get decent comparable results you should put all the algorithms in the same initial conditions.</p>
 
-<p>If sorting takes a very long time (more than 10 times longer than all 500 iterations of the linear search), you should stop sorting and use the linear search. Look at the second example to see what you need to output.</p>
+<p>For sorting, you should use the Quick sort algorithm, and for searching, you should use the Binary search algorithm.</p>
 
 <h2 style="text-align: center;">Example</h2>
 
-<p>Output both approaches one after another and see which one is faster. Output example is shown below. Note that you can get totally different sorting and searching times!</p>
-
-<p><strong>Example 1:</strong></p>
+<p>Output all three approaches one after another and see which one is faster. Output example is shown below. Note that you can get totally different sorting and searching times!</p>
 
 <pre><code class="java">Start searching (linear search)...
 Found 500 / 500 entries. Time taken: 1 min. 56 sec. 328 ms.
@@ -22,14 +18,9 @@ Found 500 / 500 entries. Time taken: 1 min. 56 sec. 328 ms.
 Start searching (bubble sort + jump search)...
 Found 500 / 500 entries. Time taken: 9 min. 15 sec. 291 ms.
 Sorting time: 8 min. 45 sec. 251 ms.
-Searching time: 0 min. 30 sec. 40 ms.</code></pre>
+Searching time: 0 min. 30 sec. 40 ms.
 
-<p><strong>Example 2: </strong></p>
-
-<pre><code class="java">Start searching (linear search)...
-Found 500 / 500 entries. Time taken: 2 min. 01 sec. 134 ms.
-
-Start searching (bubble sort + jump search)...
-Found 500 / 500 entries. Time taken: 22 min. 14 sec. 482 ms.
-Sorting time: 20 min. 12 sec. 251 ms. - STOPPED, moved to linear search
-Searching time: 2 min. 02 sec. 231 ms.</code></pre>
+Start searching (quick sort + binary search)...
+Found 500 / 500 entries. Time taken: 1 min. 21 sec. 996 ms.
+Sorting time: 1 min. 17 sec. 381 ms.
+Searching time: 0 min. 4 sec. 615 ms.</code></pre>

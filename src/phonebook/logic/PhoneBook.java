@@ -8,7 +8,7 @@ import java.io.File;
 import java.util.List;
 
 public class PhoneBook {
-    private List<Contact> contacts;
+    private final List<Contact> contacts;
     
     public PhoneBook(String filename) {
         contacts = IOReader.readDirectory(new File(filename));
@@ -44,6 +44,7 @@ public class PhoneBook {
                 }
             }
         }
+        timer.stop();
         return true;
     }
     

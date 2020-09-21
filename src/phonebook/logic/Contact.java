@@ -1,7 +1,5 @@
 package phonebook.logic;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.util.Objects;
 
 public class Contact implements Comparable<Contact> {
@@ -40,7 +38,7 @@ public class Contact implements Comparable<Contact> {
     }
     
     @Override
-    public int compareTo(@NotNull Contact o) {
+    public int compareTo(Contact o) {
         return name.compareTo(o.name);
     }
 }

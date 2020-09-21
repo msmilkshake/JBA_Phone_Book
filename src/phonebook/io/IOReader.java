@@ -6,16 +6,14 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class IOReader {
     public static List<Contact> readDirectory(File file) {
         List<Contact> contacts = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(
                 new java.io.FileReader(file))) {
-            String line = null;
+            String line;
             while ((line = br.readLine()) != null) {
                 String[] data = line.trim().split("(?<=\\d) ");
                 contacts.add(new Contact(data[1], data[0]));
@@ -30,7 +28,7 @@ public class IOReader {
         List<String> queries = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(
                 new java.io.FileReader(file))) {
-            String line = null;
+            String line;
             while ((line = br.readLine()) != null) {
                 queries.add(line.trim());
             }

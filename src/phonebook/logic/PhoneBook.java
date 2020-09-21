@@ -2,7 +2,6 @@ package phonebook.logic;
 
 import phonebook.io.IOReader;
 import phonebook.util.Search;
-import phonebook.util.Timer;
 
 import java.io.File;
 import java.util.List;
@@ -28,30 +27,20 @@ public class PhoneBook {
         return foundCount;
     }
     
-    public boolean timedBubbleSort(long linearSearchDuration) {
-        Timer timer = new Timer();
-        timer.start();
-        for (int i = 0; i < contacts.size() - 1; ++i) {
-            for (int j = 0; j < contacts.size() - 1 - i; ++j) {
-                if (contacts.get(j).compareTo(contacts.get(j + 1)) > 0) {
-                    Contact tmp = contacts.get(j);
-                    contacts.set(j, contacts.get(j + 1));
-                    contacts.set(j + 1, tmp);
-                }
-                if (System.currentTimeMillis() - timer.getStartTime()
-                        > linearSearchDuration * 10) {
-                    return false;
-                }
-            }
-        }
-        timer.stop();
-        return true;
-    }
-    
     public int jumpSearch(List<String> queries) {
         int foundCount = 0;
         for (String query : queries) {
             if (Search.jumpSearch(this, query) > -1) {
+                ++foundCount;
+            }
+        }
+        return foundCount;
+    }
+    
+    public int binarySearch(List<String> queries) {
+        int foundCount = 0;
+        for (String query : queries) {
+            if (Search.binarySearch(this, query) > -1) {
                 ++foundCount;
             }
         }

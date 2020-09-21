@@ -3,7 +3,10 @@ package phonebook.util;
 import phonebook.logic.Contact;
 import phonebook.logic.PhoneBook;
 
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Sort {
     public static boolean timedBubbleSort(PhoneBook pb, long linearSearchDuration) {
@@ -39,7 +42,16 @@ public class Sort {
     }
     
     public static int partition(List<Contact> list, int l, int r) {
-        Contact pivot = list.get(r);
+        Contact pivot;
+        if (r - l > 5) {
+            int mid = l + (r - l) / 2;
+            List<Contact> pivCandidates = Arrays
+                    .asList(list.get(l), list.get(mid), list.get(r));
+            int piv = choosePivot(pivCandidates);
+            piv = piv == 1 ? l : piv == 2 ? mid : r;
+            swap(list, piv, r);
+        }
+        pivot = list.get(r);
         int partitionI = l;
         for (int i = l; i < r; ++i) {
             if (list.get(i).compareTo(pivot) <= 0) {
@@ -48,6 +60,21 @@ public class Sort {
         }
         swap(list, partitionI, r);
         return partitionI;
+    }
+    
+    private static int choosePivot(List<Contact> list) {
+        Map<Contact, Integer> map = new HashMap<>();
+        map.put(list.get(0), 1);
+        map.put(list.get(1), 2);
+        map.put(list.get(2), 3);
+        for (int i = 0; i < list.size(); ++i) {
+            for (int j = 0; j < list.size() - 1 - i; ++j) {
+                if (list.get(j).compareTo(list.get(j + 1)) > 0) {
+                    swap(list, i, i + 1);
+                }
+            }
+        }
+        return map.get(list.get(1));
     }
     
     private static void swap(List<Contact> contacts, int a, int b) {

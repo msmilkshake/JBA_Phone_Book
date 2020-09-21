@@ -47,4 +47,26 @@ public class Search {
         }
         return -1;
     }
+    
+    public static int binarySearch(PhoneBook phoneBook, String query) {
+        return binarySearch(phoneBook.getContacts(), query,
+                0, phoneBook.getContacts().size() - 1);
+    }
+    
+    public static int binarySearch(List<Contact> list, String query,
+            int left, int right) {
+        if (left <= right) {
+            int middle = left + (right - left) / 2;
+            String queryName = list.get(middle).getName();
+            if (queryName.equals(query)) {
+                return middle;
+            }
+            if (queryName.compareTo(query) > 0) {
+                return binarySearch(list, query, left, middle - 1);
+            } else {
+                return binarySearch(list, query, middle + 1, right);
+            }
+        }
+        return -1;
+    }
 }

@@ -19,7 +19,7 @@ public class Sort {
                     swap(contacts, i, i + 1);
                 }
                 if (System.currentTimeMillis() - timer.getStartTime()
-                        > linearSearchDuration * 10) {
+                        > linearSearchDuration * 2) {
                     return false;
                 }
             }

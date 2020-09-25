@@ -1,16 +1,16 @@
-<h2 style="text-align: center;">Stage 3/4: Need for speed</h2>
+<h2 style="text-align: center;">Stage 4/4: Instant search</h2>
 
 <h2 style="text-align: center;">Description</h2>
 
-<p>Let's use faster methods to sort the list of numbers as well as to search in the list.</p>
+<p>The search is pretty fast, isn't it? Is it possible to come up with something even faster?</p>
 
-<p>As in the previous stage, you should first sort the list of phone numbers by an owner name and then search the numbers of the 500 people from the list given in the first stage. Remember that to get decent comparable results you should put all the algorithms in the same initial conditions.</p>
+<p>In the previous stage you prepared the data by the algorithm with complexity <code class="java">O(n log n)</code> and found the data by the algorithm with complexity <code class="java">O(log n)</code>. At this stage you will implement faster data preparation and faster search. The preparation will have a complexity of <code class="java">O(n)</code> and the search will have a complexity of <code class="java">O(1)</code>. A <strong>hash table</strong> will help you with this. Implement this class by yourself.</p>
 
-<p>For sorting, you should use the Quick sort algorithm, and for searching, you should use the Binary search algorithm.</p>
+<p>You need to add all the elements to the hash table and then find the necessary phone numbers as in the previous stages. Since the hash table is filled in once, you need to measure the hash table creation time separately (this is like sorting in the previous stage).</p>
 
 <h2 style="text-align: center;">Example</h2>
 
-<p>Output all three approaches one after another and see which one is faster. Output example is shown below. Note that you can get totally different sorting and searching times!</p>
+<p>Output all four approaches one after another and see which one is faster. Output example is shown below. Note that you can get totally different sorting and searching times!</p>
 
 <pre><code class="java">Start searching (linear search)...
 Found 500 / 500 entries. Time taken: 1 min. 56 sec. 328 ms.
@@ -23,4 +23,9 @@ Searching time: 0 min. 30 sec. 40 ms.
 Start searching (quick sort + binary search)...
 Found 500 / 500 entries. Time taken: 1 min. 21 sec. 996 ms.
 Sorting time: 1 min. 17 sec. 381 ms.
-Searching time: 0 min. 4 sec. 615 ms.</code></pre>
+Searching time: 0 min. 4 sec. 615 ms.
+
+Start searching (hash table)...
+Found 500 / 500 entries. Time taken: 0 min. 4 sec. 256 ms.
+Creating time: 0 min. 4 sec. 121 ms.
+Searching time: 0 min. 0 sec. 135 ms.</code></pre>

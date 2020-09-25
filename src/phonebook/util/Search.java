@@ -4,6 +4,7 @@ import phonebook.logic.Contact;
 import phonebook.logic.PhoneBook;
 
 import java.util.List;
+import java.util.Map;
 
 public class Search {
     public static int linearSearch(PhoneBook phoneBook, String query) {
@@ -68,5 +69,15 @@ public class Search {
             }
         }
         return -1;
+    }
+    
+    public static int mapSearch(List<String> queries, Map<String, Contact> map) {
+        int queriesFound = 0;
+        for (String query : queries) {
+            if (map.get(query) != null) {
+                ++queriesFound;
+            }
+        }
+        return queriesFound;
     }
 }

@@ -1,11 +1,14 @@
 package phonebook.logic;
 
 import phonebook.io.IOReader;
+import phonebook.util.Search;
 import phonebook.util.Sort;
 import phonebook.util.Timer;
 
 import java.io.File;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class TextUI {
     
@@ -14,6 +17,13 @@ public class TextUI {
     private final String findFile = "test/find.txt";
     
     public void start() {
+        long linearSearchTime = linear();
+        bubbleJump(linearSearchTime);
+        quickBinary();
+        hashtableSearch();
+    }
+    
+    private long linear() {
         timer.start();
         PhoneBook phoneBook = new PhoneBook(dirFile);
         List<String> queries = IOReader.readQueries(new File(findFile));
@@ -22,17 +32,20 @@ public class TextUI {
         timer.stop();
         System.out.println("Found " + queriesFound + " / " + queries.size() +
                 " entries. Time taken: " + timer);
-        long linearSearchTime = timer.getElapsed();
-        
+        return timer.getElapsed();
+    }
+    
+    private void bubbleJump(long linearSearchTime) {
         timer.start();
-        phoneBook = new PhoneBook(dirFile);
-        queries = IOReader.readQueries(new File(findFile));
+        PhoneBook phoneBook = new PhoneBook(dirFile);
+        List<String> queries = IOReader.readQueries(new File(findFile));
         System.out.println("Start searching (bubble sort + jump search)...");
         boolean bubbleSortSuccess =
                 Sort.timedBubbleSort(phoneBook, linearSearchTime);
         timer.stop();
         long sortTime = timer.getElapsed();
         timer.start();
+        int queriesFound;
         if (bubbleSortSuccess) {
             queriesFound = phoneBook.jumpSearch(queries);
         } else {
@@ -40,23 +53,47 @@ public class TextUI {
         }
         timer.stop();
         long searchTime = timer.getElapsed();
-        System.out.println("Found " + queriesFound + " / " + queries.size() +
-                " entries. Time taken: " + Timer.longToString(sortTime + searchTime) +
-                "\nSorting time: " + Timer.longToString(sortTime) +
-                "\nSearching time: " + Timer.longToString(searchTime));
-        
+        printStats(queriesFound, queries.size(), sortTime, searchTime);
+    }
+    
+    private void quickBinary() {
         timer.start();
-        phoneBook = new PhoneBook(dirFile);
-        queries = IOReader.readQueries(new File(findFile));
+        PhoneBook phoneBook = new PhoneBook(dirFile);
+        List<String> queries = IOReader.readQueries(new File(findFile));
         System.out.println("Start searching (quick sort + binary search)...");
         Sort.quickSort(phoneBook);
         timer.stop();
-        sortTime = timer.getElapsed();
+        long sortTime = timer.getElapsed();
         timer.start();
-        queriesFound = phoneBook.binarySearch(queries);
+        int queriesFound = phoneBook.binarySearch(queries);
         timer.stop();
-        searchTime = timer.getElapsed();
+        long searchTime = timer.getElapsed();
+        printStats(queriesFound, queries.size(), sortTime, searchTime);
+    }
+    
+    private void hashtableSearch() {
+        timer.start();
+        PhoneBook phoneBook = new PhoneBook(dirFile);
+        Map<String, Contact> map = new HashMap<>();
+        for (Contact contact : phoneBook.getContacts()) {
+            map.put(contact.getName(), contact);
+        }
+        List<String> queries = IOReader.readQueries(new File(findFile));
+        System.out.println("Start searching (hash table)...");
+        timer.stop();
+        long creationTime = timer.getElapsed();
+        timer.start();
+        int queriesFound = Search.mapSearch(queries, map);
+        timer.stop();
+        long searchTime = timer.getElapsed();
         System.out.println("Found " + queriesFound + " / " + queries.size() +
+                " entries. Time taken: " + Timer.longToString(creationTime + searchTime) +
+                "\nCreating time: " + Timer.longToString(creationTime) +
+                "\nSearching time: " + Timer.longToString(searchTime));
+    }
+    
+    private void printStats(int queriesFound, int size, long sortTime, long searchTime) {
+        System.out.println("Found " + queriesFound + " / " + size +
                 " entries. Time taken: " + Timer.longToString(sortTime + searchTime) +
                 "\nSorting time: " + Timer.longToString(sortTime) +
                 "\nSearching time: " + Timer.longToString(searchTime));
